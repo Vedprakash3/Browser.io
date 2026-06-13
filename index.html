@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ultimate Launcher - Full Apps Grid</title>
-    <!-- असली लोगोस (FontAwesome) के लिए CDN -->
+    <title>Ultimate Launcher - Clean Minimal Grid</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* --- CSS VARIABLES FOR THEME SWITCHING --- */
@@ -19,7 +18,6 @@
             --news-title: #111;
             --news-meta: #333;
             --card-border: rgba(0, 0, 0, 0.05);
-            --dropdown-bg: #ffffff;
         }
 
         [data-theme="dark"] {
@@ -33,7 +31,6 @@
             --news-title: #f3f4f6;
             --news-meta: #9ca3af;
             --card-border: rgba(255, 255, 255, 0.08);
-            --dropdown-bg: #1f2937;
         }
 
         body { 
@@ -58,52 +55,13 @@
             align-items: center; 
             padding: 0 15px; 
             box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
-            position: relative;
         }
         .search-bar .g-logo { font-size: 20px; font-weight: bold; color: #4285F4; margin-right: 10px; }
         .search-bar input { border: none; background: none; outline: none; width: 100%; font-size: 16px; color: var(--search-text); }
         
-        .header-actions { display: flex; align-items: center; gap: 16px; margin-left: auto; }
-        .theme-toggle, .header-dl-icon { cursor: pointer; font-size: 20px; user-select: none; color: var(--search-text); transition: transform 0.2s; }
-        .header-dl-icon { color: #4285F4; display: inline-block; } 
-        .theme-toggle:hover, .header-dl-icon:hover { transform: scale(1.15); }
-
-        /* --- ऊपर का डाउनलोड ड्रॉपडाउन --- */
-        .dl-dropdown {
-            display: none;
-            position: absolute;
-            top: 55px;
-            right: 0;
-            width: 320px;
-            max-height: 300px;
-            background: var(--dropdown-bg);
-            border-radius: 16px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.25);
-            z-index: 100;
-            overflow-y: auto;
-            padding: 12px;
-            border: 1px solid var(--widget-border);
-        }
-        .dl-dropdown::-webkit-scrollbar { width: 4px; }
-        .dl-dropdown::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.2); border-radius: 4px; }
-        .dropdown-header { font-size: 13px; font-weight: bold; color: var(--news-title); border-bottom: 1px solid var(--card-border); padding-bottom: 6px; margin-bottom: 8px; display: flex; justify-content: space-between; }
-
-        /* --- GOOGLE IMAGE LIVE SEARCH RESULTS PANEL --- */
-        .image-results-panel {
-            display: none;
-            background: var(--widget-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--widget-border);
-            border-radius: 25px;
-            padding: 15px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
-        }
-        .image-results-panel h4 { margin: 0 0 10px 0; color: var(--news-title); font-size: 14px; }
-        .image-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-        .img-box { position: relative; border-radius: 10px; overflow: hidden; height: 90px; background: #eee; }
-        .img-box img { width: 100%; height: 100%; object-fit: cover; }
-        .img-box .dl-pic-btn { position: absolute; bottom: 5px; right: 5px; background: #4285F4; color: #fff; border: none; border-radius: 50%; width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.3); }
+        .header-actions { display: flex; align-items: center; margin-left: auto; }
+        .theme-toggle { cursor: pointer; font-size: 20px; user-select: none; color: var(--search-text); transition: transform 0.2s; }
+        .theme-toggle:hover { transform: scale(1.15); }
 
         /* --- APPS GRID (4 Columns - 2 Rows for 8 Apps) --- */
         .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px 12px; }
@@ -159,44 +117,27 @@
 </head>
 <body>
 
-    <!-- 1. GOOGLE SEARCH BAR WITH ACTIONS & DROPDOWN -->
     <div class="search-bar">
         <span class="g-logo">G</span>
-        <input type="text" id="searchInput" placeholder="Search images (e.g., cat pic)..." onkeypress="handleSearch(event)">
+        <input type="text" id="searchInput" placeholder="Search Google..." onkeypress="handleSearch(event)">
         
         <div class="header-actions">
             <span class="theme-toggle" onclick="toggleTheme()">🌗</span>
-            <span class="header-dl-icon" onclick="toggleHeaderDropdown()"><i class="fas fa-download"></i></span>
-        </div>
-
-        <div class="dl-dropdown" id="headerDlDropdown">
-            <div class="dropdown-header"><span>📥 Downloaded Files (Google Search)</span><span style="cursor:pointer;color:#d32f2f" onclick="toggleHeaderDropdown()">✕</span></div>
-            <div id="dropdownItemsContainer"></div>
         </div>
     </div>
 
-    <!-- --- GOOGLE IMAGE LIVE SEARCH RESULTS PANEL --- -->
-    <div class="image-results-panel" id="imgResultsPanel">
-        <h4 id="searchKeywordHeading">Google Image Results:</h4>
-        <div class="image-grid" id="imageGridContainer"></div>
-    </div>
-
-    <!-- 2. APPS GRID (अब पूरे 8 ऐप्स के साथ) -->
     <div class="grid">
-        <!-- Row 1 -->
         <a href="https://www.facebook.com" target="_blank" class="app-link"><div class="app"><div class="icon" style="background:#1877F2;color:white;"><i class="fab fa-facebook-f"></i></div>Facebook</div></a>
         <a href="https://www.google.com" target="_blank" class="app-link"><div class="app"><div class="icon"><img src="https://www.google.com/favicon.ico"></div>Google</div></a>
         <a href="https://www.instagram.com" target="_blank" class="app-link"><div class="app"><div class="icon" style="background:linear-gradient(45deg, #f09433, #bc1888);color:white;"><i class="fab fa-instagram"></i></div>Instagram</div></a>
         <a href="https://play.google.com/store/games" target="_blank" class="app-link"><div class="app"><div class="icon" style="background:#ff5722;color:white;"><i class="fas fa-gamepad"></i></div>Games</div></a>
         
-        <!-- Row 2 -->
         <a href="https://www.youtube.com" target="_blank" class="app-link"><div class="app"><div class="icon" style="background:#FF0000;color:white;"><i class="fab fa-youtube"></i></div>YouTube</div></a>
         <a href="https://www.twitter.com" target="_blank" class="app-link"><div class="app"><div class="icon" style="background:#1DA1F2;color:white;"><i class="fab fa-twitter"></i></div>Twitter</div></a>
         <a href="https://www.linkedin.com" target="_blank" class="app-link"><div class="app"><div class="icon" style="background:#0077B5;color:white;"><i class="fab fa-linkedin-in"></i></div>LinkedIn</div></a>
         <a href="https://www.github.com" target="_blank" class="app-link"><div class="app"><div class="icon" style="background:#24292e;color:white;"><i class="fab fa-github"></i></div>GitHub</div></a>
     </div>
 
-    <!-- 3. THE SLIDING WIDGET -->
     <div class="widget">
         <div class="tabs-container">
             <div class="tabs">
@@ -206,21 +147,20 @@
                 <span class="tab" onclick="moveToSlide(3)">ज्योतिष</span>
                 <span class="tab" onclick="moveToSlide(4)">बिजनेस</span>
                 <span class="tab" onclick="moveToSlide(5)">टेक्नोलॉजी</span>
-                <span class="tab" onclick="moveToSlide(6)">डाउनलोड</span>
+                <span class="tab" onclick="moveToSlide(6)">सेव्ड न्यूज़</span>
             </div>
         </div>
         
         <div class="slider-wrapper">
             <div class="slider-track" id="sliderTrack">
                 
-                <!-- Slide 1: मनोरंजन -->
                 <div class="slide">
                     <div class="news-card">
                         <div class="news-left">
                             <p class="news-title" id="t1">Trending: बॉक्स ऑफिस पर नया रिकॉर्ड, एडवांस बुकिंग में फिल्म ने तोड़े सारे पुराने रिकॉर्ड्स</p>
                             <span class="news-meta">Pinkvilla • <span class="current-date"></span> 
                                 <button id="btn-t1" class="star-btn not-starred" onclick="toggleStar('t1', 'Pinkvilla', 'https://picsum.photos/id/1025/75/75')">
-                                    <i class="far fa-star"></i> Star
+                                    <i class="far fa-star"></i> Save
                                 </button>
                             </span>
                         </div>
@@ -228,14 +168,13 @@
                     </div>
                 </div>
 
-                <!-- Slide 2: क्रिकेट -->
                 <div class="slide">
                     <div class="news-card">
                         <div class="news-left">
                             <p class="news-title" id="t2">Cricket Live: रोमांचक मोड़ पर पहुंचा मैच, अंतिम ओवर में जीत के लिए चाहिए इतने रन</p>
                             <span class="news-meta">Cricbuzz • <span class="current-date"></span> 
                                 <button id="btn-t2" class="star-btn not-starred" onclick="toggleStar('t2', 'Cricbuzz', 'https://picsum.photos/id/200/75/75')">
-                                    <i class="far fa-star"></i> Star
+                                    <i class="far fa-star"></i> Save
                                 </button>
                             </span>
                         </div>
@@ -243,14 +182,13 @@
                     </div>
                 </div>
 
-                <!-- Slide 3: राजनीति -->
                 <div class="slide">
                     <div class="news-card">
                         <div class="news-left">
                             <p class="news-title" id="t3">पॉलिटिक्स लाइव: चुनाव नतीजों के बाद आज होगी अहम कैबिनेट बैठक</p>
                             <span class="news-meta">Aaj Tak • <span class="current-date"></span> 
                                 <button id="btn-t3" class="star-btn not-starred" onclick="toggleStar('t3', 'Aaj Tak', 'https://picsum.photos/id/1062/75/75')">
-                                    <i class="far fa-star"></i> Star
+                                    <i class="far fa-star"></i> Save
                                 </button>
                             </span>
                         </div>
@@ -262,110 +200,23 @@
                 <div class="slide"><div class="no-data">मार्केट और बिज़नेस वर्ल्ड के बड़े अपडेट्स।</div></div>
                 <div class="slide"><div class="no-data">गैजेट्स और अपकमिंग स्मार्टफोन्स की जानकारी।</div></div>
 
-                <!-- Slide 7: डाउनलोड न्यूज़ कंटेनर -->
                 <div class="slide" id="starredSlide"></div>
             </div>
         </div>
     </div>
 
 <script>
-    // --- 1. ऊपर के डाउनलोड मैनेजर का लॉजिक ---
-    function toggleHeaderDropdown() {
-        const dropdown = document.getElementById('headerDlDropdown');
-        if(dropdown.style.display === 'block') {
-            dropdown.style.display = 'none';
-        } else {
-            dropdown.style.display = 'block';
-            displayDownloadedImages(); 
-        }
-    }
-
+    // --- GOOGLE SEARCH REDIRECT ---
     function handleSearch(e) {
         if (e.key === 'Enter') {
             let query = document.getElementById('searchInput').value.trim();
             if(query !== "") {
-                let lowerQuery = query.toLowerCase();
-                if(lowerQuery.includes('pic') || lowerQuery.includes('photo') || lowerQuery.includes('image') || lowerQuery.includes('img')) {
-                    generateImageResults(query);
-                } else {
-                    window.open("https://www.google.com/search?q=" + encodeURIComponent(query), "_blank");
-                }
+                window.open("https://www.google.com/search?q=" + encodeURIComponent(query), "_blank");
             }
         }
     }
 
-    function generateImageResults(keyword) {
-        const panel = document.getElementById('imgResultsPanel');
-        const container = document.getElementById('imageGridContainer');
-        document.getElementById('searchKeywordHeading').innerText = `Google Image Results for "${keyword}":`;
-        
-        container.innerHTML = ''; 
-        panel.style.display = 'block'; 
-
-        const randomIDs = [12, 34, 85, 120, 230, 250];
-        for(let i=0; i<3; i++) {
-            let randId = randomIDs[Math.floor(Math.random() * randomIDs.length)] + i*4;
-            let imgUrl = `https://picsum.photos/id/${randId}/300/300`;
-            
-            container.innerHTML += `
-                <div class="img-box">
-                    <img src="${imgUrl}">
-                    <button class="dl-pic-btn" onclick="downloadImageFile('${keyword} _${i+1}', '${imgUrl}')"><i class="fas fa-download"></i></button>
-                </div>
-            `;
-        }
-    }
-
-    function downloadImageFile(title, imgUrl) {
-        let downloads = JSON.parse(localStorage.getItem('searchDownloads')) || [];
-        const date = new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'short' });
-
-        if (downloads.some(item => item.imgUrl === imgUrl)) {
-            alert("यह तस्वीर पहले से डाउनलोड फोल्डर में है! 🖼️");
-            return;
-        }
-
-        downloads.push({ title: title, date: date, imgUrl: imgUrl });
-        localStorage.setItem('searchDownloads', JSON.stringify(downloads));
-        
-        alert("तस्वीर ऊपर के 📥 डाउनलोड मैनेजर में सेव हो गई!");
-        displayDownloadedImages();
-    }
-
-    function displayDownloadedImages() {
-        const container = document.getElementById('dropdownItemsContainer');
-        let downloads = JSON.parse(localStorage.getItem('searchDownloads')) || [];
-        
-        if (downloads.length === 0) {
-            container.innerHTML = '<div class="no-data">कोई डाउनलोड की गई फाइल नहीं है! 📭</div>';
-            return;
-        }
-
-        container.innerHTML = '';
-        downloads.forEach((item, index) => {
-            container.innerHTML += `
-                <div class="news-card" style="padding: 8px 0;">
-                    <div class="news-left">
-                        <p class="news-title" style="font-size:12px; margin-bottom:4px;">📸 Photo: ${item.title}</p>
-                        <span class="news-meta" style="font-size:10px;">Google Search • ${item.date} 
-                            <button class="delete-btn" style="padding:1px 4px;" onclick="deleteImageFile(${index})"><i class="fas fa-trash"></i> Delete</button>
-                        </span>
-                    </div>
-                    <div class="news-right"><img src="${item.imgUrl}" style="width:45px; height:45px; border-radius:6px;"></div>
-                </div>
-            `;
-        });
-    }
-
-    function deleteImageFile(index) {
-        let downloads = JSON.parse(localStorage.getItem('searchDownloads')) || [];
-        downloads.splice(index, 1);
-        localStorage.setItem('searchDownloads', JSON.stringify(downloads));
-        displayDownloadedImages();
-    }
-
-
-    // --- 2. नीचे स्लाइडर के 'डाउनलोड' टैब का लॉजिक ---
+    // --- नीचे स्लाइडर के 'सेव्ड न्यूज़' टैब का लॉजिक ---
     function toggleStar(id, source, imgUrl) {
         const title = document.getElementById(id).innerText;
         const date = new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'short' });
@@ -380,7 +231,7 @@
             
             if(btn) {
                 btn.className = "star-btn not-starred";
-                btn.innerHTML = '<i class="far fa-star"></i> Star';
+                btn.innerHTML = '<i class="far fa-star"></i> Save';
             }
         } else {
             starredList.push({ title, source, date, imgUrl, elementId: id });
@@ -388,7 +239,7 @@
             
             if(btn) {
                 btn.className = "star-btn is-starred";
-                btn.innerHTML = '<i class="fas fa-star"></i> Starred';
+                btn.innerHTML = '<i class="fas fa-star"></i> Saved';
             }
         }
         displayStarredNews();
@@ -404,10 +255,10 @@
                     const isSaved = starredList.some(item => item.title === titleEl.innerText);
                     if(isSaved) {
                         btn.className = "star-btn is-starred";
-                        btn.innerHTML = '<i class="fas fa-star"></i> Starred';
+                        btn.innerHTML = '<i class="fas fa-star"></i> Saved';
                     } else {
                         btn.className = "star-btn not-starred";
-                        btn.innerHTML = '<i class="far fa-star"></i> Star';
+                        btn.innerHTML = '<i class="far fa-star"></i> Save';
                     }
                 }
             }
@@ -419,7 +270,7 @@
         let starredList = JSON.parse(localStorage.getItem('starredNews')) || [];
         
         if (starredList.length === 0) {
-            container.innerHTML = '<div class="no-data">कोई डाउनलोड की गई न्यूज़ सेव नहीं है!</div>';
+            container.innerHTML = '<div class="no-data">कोई न्यूज़ सेव नहीं है!</div>';
             return;
         }
 
@@ -447,11 +298,10 @@
         const btn = document.getElementById('btn-' + elementId);
         if(btn) {
             btn.className = "star-btn not-starred";
-            btn.innerHTML = '<i class="far fa-star"></i> Star';
+            btn.innerHTML = '<i class="far fa-star"></i> Save';
         }
         displayStarredNews();
     }
-
 
     // --- THEME & SLIDER CORE FUNCTIONS ---
     function toggleTheme() {
@@ -482,7 +332,6 @@
         setRealTimeDate();
         updateStarButtonStates(); 
         displayStarredNews();
-        displayDownloadedImages();
     };
 </script>
 
