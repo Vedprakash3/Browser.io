@@ -63,7 +63,7 @@
         .theme-toggle { cursor: pointer; font-size: 20px; user-select: none; color: var(--search-text); transition: transform 0.2s; }
         .theme-toggle:hover { transform: scale(1.15); }
 
-        /* --- APPS GRID (4 Columns - 2 Rows for 8 Apps) --- */
+        /* --- APPS GRID --- */
         .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px 12px; }
         .app-link { text-decoration: none; display: block; }
         .app { text-align: center; color: var(--app-text); font-size: 12px; cursor: pointer; text-shadow: 1px 1px 3px rgba(0,0,0,0.3); }
@@ -154,52 +154,132 @@
         <div class="slider-wrapper">
             <div class="slider-track" id="sliderTrack">
                 
+                <!-- 1. मनोरंजन (Entertainment) -->
                 <div class="slide">
                     <div class="news-card">
                         <div class="news-left">
                             <p class="news-title" id="t1">Trending: बॉक्स ऑफिस पर नया रिकॉर्ड, एडवांस बुकिंग में फिल्म ने तोड़े सारे पुराने रिकॉर्ड्स</p>
                             <span class="news-meta">Pinkvilla • <span class="current-date"></span> 
-                                <button id="btn-t1" class="star-btn not-starred" onclick="toggleStar('t1', 'Pinkvilla', 'https://picsum.photos/id/1025/75/75')">
-                                    <i class="far fa-star"></i> Save
-                                </button>
+                                <button id="btn-t1" class="star-btn not-starred" onclick="toggleStar('t1', 'Pinkvilla', 'https://picsum.photos/id/1025/75/75')"><i class="far fa-star"></i> Save</button>
                             </span>
                         </div>
                         <div class="news-right"><img src="https://picsum.photos/id/1025/75/75"></div>
                     </div>
+                    <div class="news-card">
+                        <div class="news-left">
+                            <p class="news-title" id="t4">OTT Release: इस हफ्ते रिलीज हो रही हैं ये 5 धमाकेदार वेब सीरीज, सस्पेंस से भरपूर है लिस्ट</p>
+                            <span class="news-meta">Koimoi • <span class="current-date"></span> 
+                                <button id="btn-t4" class="star-btn not-starred" onclick="toggleStar('t4', 'Koimoi', 'https://picsum.photos/id/1011/75/75')"><i class="far fa-star"></i> Save</button>
+                            </span>
+                        </div>
+                        <div class="news-right"><img src="https://picsum.photos/id/1011/75/75"></div>
+                    </div>
                 </div>
 
+                <!-- 2. क्रिकेट (Cricket) -->
                 <div class="slide">
                     <div class="news-card">
                         <div class="news-left">
                             <p class="news-title" id="t2">Cricket Live: रोमांचक मोड़ पर पहुंचा मैच, अंतिम ओवर में जीत के लिए चाहिए इतने रन</p>
                             <span class="news-meta">Cricbuzz • <span class="current-date"></span> 
-                                <button id="btn-t2" class="star-btn not-starred" onclick="toggleStar('t2', 'Cricbuzz', 'https://picsum.photos/id/200/75/75')">
-                                    <i class="far fa-star"></i> Save
-                                </button>
+                                <button id="btn-t2" class="star-btn not-starred" onclick="toggleStar('t2', 'Cricbuzz', 'https://picsum.photos/id/200/75/75')"><i class="far fa-star"></i> Save</button>
                             </span>
                         </div>
                         <div class="news-right"><img src="https://picsum.photos/id/200/75/75"></div>
                     </div>
+                    <!-- क्रिकेट में नया जोड़ा गया कार्ड -->
+                    <div class="news-card">
+                        <div class="news-left">
+                            <p class="news-title" id="t5">Breaking: टी20 वर्ल्ड कप के लिए टीम का हुआ ऐलान, इन युवा खिलाड़ियों को मिला बड़ा मौका</p>
+                            <span class="news-meta">Sports Tak • <span class="current-date"></span> 
+                                <button id="btn-t5" class="star-btn not-starred" onclick="toggleStar('t5', 'Sports Tak', 'https://picsum.photos/id/1058/75/75')"><i class="far fa-star"></i> Save</button>
+                            </span>
+                        </div>
+                        <div class="news-right"><img src="https://picsum.photos/id/1058/75/75"></div>
+                    </div>
+                    <!-- एक और क्रिकेट अपडेट -->
+                    <div class="news-card">
+                        <div class="news-left">
+                            <p class="news-title" id="t6">IPL Update: कप्तान ने प्रेस कॉन्फ्रेंस में किया खुलासा, कहा- "हम अगली रणनीति के लिए तैयार हैं"</p>
+                            <span class="news-meta">ESPNCricinfo • <span class="current-date"></span> 
+                                <button id="btn-t6" class="star-btn not-starred" onclick="toggleStar('t6', 'ESPNCricinfo', 'https://picsum.photos/id/103/75/75')"><i class="far fa-star"></i> Save</button>
+                            </span>
+                        </div>
+                        <div class="news-right"><img src="https://picsum.photos/id/103/75/75"></div>
+                    </div>
                 </div>
 
+                <!-- 3. राजनीति (Politics) -->
                 <div class="slide">
                     <div class="news-card">
                         <div class="news-left">
                             <p class="news-title" id="t3">पॉलिटिक्स लाइव: चुनाव नतीजों के बाद आज होगी अहम कैबिनेट बैठक</p>
                             <span class="news-meta">Aaj Tak • <span class="current-date"></span> 
-                                <button id="btn-t3" class="star-btn not-starred" onclick="toggleStar('t3', 'Aaj Tak', 'https://picsum.photos/id/1062/75/75')">
-                                    <i class="far fa-star"></i> Save
-                                </button>
+                                <button id="btn-t3" class="star-btn not-starred" onclick="toggleStar('t3', 'Aaj Tak', 'https://picsum.photos/id/1062/75/75')"><i class="far fa-star"></i> Save</button>
                             </span>
                         </div>
                         <div class="news-right"><img src="https://picsum.photos/id/1062/75/75"></div>
                     </div>
+                    <div class="news-card">
+                        <div class="news-left">
+                            <p class="news-title" id="t7">बड़ा फैसला: सरकार ने नई योजना का किया ऐलान, आम आदमी को मिलेगी बड़ी राहत</p>
+                            <span class="news-meta">NDTV India • <span class="current-date"></span> 
+                                <button id="btn-t7" class="star-btn not-starred" onclick="toggleStar('t7', 'NDTV India', 'https://picsum.photos/id/1044/75/75')"><i class="far fa-star"></i> Save</button>
+                            </span>
+                        </div>
+                        <div class="news-right"><img src="https://picsum.photos/id/1044/75/75"></div>
+                    </div>
                 </div>
 
-                <div class="slide"><div class="no-data">आज का राशिफल और पंचांग।</div></div>
-                <div class="slide"><div class="no-data">मार्केट और बिज़नेस वर्ल्ड के बड़े अपडेट्स।</div></div>
-                <div class="slide"><div class="no-data">गैजेट्स और अपकमिंग स्मार्टफोन्स की जानकारी।</div></div>
+                <!-- 4. ज्योतिष (Astrology) -->
+                <div class="slide">
+                    <div class="news-card">
+                        <div class="news-left">
+                            <p class="news-title" id="t8">आज का राशिफल: इन 3 राशियों के लिए बन रहा है धन लाभ का विशेष योग, जानें अपना हाल</p>
+                            <span class="news-meta">Astrotalk • <span class="current-date"></span> 
+                                <button id="btn-t8" class="star-btn not-starred" onclick="toggleStar('t8', 'Astrotalk', 'https://picsum.photos/id/1001/75/75')"><i class="far fa-star"></i> Save</button>
+                            </span>
+                        </div>
+                        <div class="news-right"><img src="https://picsum.photos/id/1001/75/75"></div>
+                    </div>
+                </div>
 
+                <!-- 5. बिजनेस (Business) -->
+                <div class="slide">
+                    <div class="news-card">
+                        <div class="news-left">
+                            <p class="news-title" id="t9">Market Update: शेयर बाजार में लौटी रौनक, सेंसेक्स ने छुआ नया ऐतिहासिक शिखर</p>
+                            <span class="news-meta">Moneycontrol • <span class="current-date"></span> 
+                                <button id="btn-t9" class="star-btn not-starred" onclick="toggleStar('t9', 'Moneycontrol', 'https://picsum.photos/id/1070/75/75')"><i class="far fa-star"></i> Save</button>
+                            </span>
+                        </div>
+                        <div class="news-right"><img src="https://picsum.photos/id/1070/75/75"></div>
+                    </div>
+                </div>
+
+                <!-- 6. टेक्नोलॉजी (Technology) -->
+                <div class="slide">
+                    <div class="news-card">
+                        <div class="news-left">
+                            <p class="news-title" id="t10">Tech News: नया AI मॉडल हुआ लॉन्च, इंसानों की तरह सोच और समझ कर दे रहा है जवाब</p>
+                            <span class="news-meta">Gadgets 360 • <span class="current-date"></span> 
+                                <button id="btn-t10" class="star-btn not-starred" onclick="toggleStar('t10', 'Gadgets 360', 'https://picsum.photos/id/1080/75/75')"><i class="far fa-star"></i> Save</button>
+                            </span>
+                        </div>
+                        <div class="news-right"><img src="https://picsum.photos/id/1080/75/75"></div>
+                    </div>
+                    <div class="news-card">
+                        <div class="news-left">
+                            <p class="news-title" id="t11">Smartphone Launch: 200MP कैमरे के साथ नया फ्लैगशिप फोन बाजार में उतरा, जानें कीमत</p>
+                            <span class="news-meta">Tech Radar • <span class="current-date"></span> 
+                                <button id="btn-t11" class="star-btn not-starred" onclick="toggleStar('t11', 'Tech Radar', 'https://picsum.photos/id/109/75/75')"><i class="far fa-star"></i> Save</button>
+                            </span>
+                        </div>
+                        <div class="news-right"><img src="https://picsum.photos/id/109/75/75"></div>
+                    </div>
+                </div>
+
+                <!-- 7. सेव्ड न्यूज़ (Saved News) -->
                 <div class="slide" id="starredSlide"></div>
             </div>
         </div>
