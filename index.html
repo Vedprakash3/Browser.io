@@ -18,6 +18,8 @@
             --news-title: #111;
             --news-meta: #333;
             --card-border: rgba(0, 0, 0, 0.05);
+            --btn-bg: rgba(255, 255, 255, 0.4);
+            --btn-hover: rgba(255, 255, 255, 0.6);
         }
 
         [data-theme="dark"] {
@@ -31,6 +33,8 @@
             --news-title: #f3f4f6;
             --news-meta: #9ca3af;
             --card-border: rgba(255, 255, 255, 0.08);
+            --btn-bg: rgba(0, 0, 0, 0.3);
+            --btn-hover: rgba(0, 0, 0, 0.5);
         }
 
         body { 
@@ -98,15 +102,36 @@
         .slide { width: 14.285%; height: 100%; flex-shrink: 0; box-sizing: border-box; overflow-y: auto; padding: 0 5px; }
         .slide::-webkit-scrollbar { display: none; }
 
-        /* न्यूज़ कार्ड लेआउट */
-        .news-card { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--card-border); }
-        .news-left { flex: 1; padding-right: 12px; }
-        .news-title { font-size: 13px; font-weight: 600; color: var(--news-title); line-height: 1.4; margin: 0 0 6px 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-        .news-meta { font-size: 11px; color: var(--news-meta); display: flex; align-items: center; gap: 10px; }
-        .news-right img { width: 60px; height: 60px; border-radius: 10px; object-fit: cover; }
+        /* न्यूज़ कार्ड लेआउट (बिना इमेज) */
+        .news-card { display: flex; flex-direction: column; padding: 12px 0; border-bottom: 1px solid var(--card-border); }
+        .news-left { flex: 1; }
+        
+        /* नया बटन स्टाइल (News/Links के लिए) */
+        .btn {
+            background: var(--btn-bg);
+            border: 1px solid var(--card-border);
+            color: var(--news-title);
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin: 0 0 10px 0;
+            width: 100%;
+            text-align: left;
+            transition: background 0.2s, transform 0.1s;
+        }
+        .btn:hover { background: var(--btn-hover); }
+        .btn:active { transform: scale(0.98); }
+
+        .news-title { font-size: 14px; font-weight: 600; color: var(--news-title); margin: 0 0 8px 0; }
+        .news-meta { font-size: 11px; color: var(--news-meta); display: flex; align-items: center; justify-content: space-between; gap: 10px; }
         
         /* स्टार और डिलीट बटन्स */
-        .star-btn, .delete-btn { background: none; border: none; cursor: pointer; padding: 2px 6px; font-size: 12px; border-radius: 4px; display: inline-flex; align-items: center; gap: 4px; font-weight: 500; }
+        .star-btn, .delete-btn { background: none; border: none; cursor: pointer; padding: 4px 8px; font-size: 11px; border-radius: 4px; display: inline-flex; align-items: center; gap: 4px; font-weight: 500; }
         
         .star-btn.not-starred { color: #fff; background: rgba(255, 255, 255, 0.2); text-shadow: 0 1px 2px rgba(0,0,0,0.4); }
         .star-btn.is-starred { color: #e0a900; background: rgba(224, 169, 0, 0.15); }
@@ -158,21 +183,19 @@
                 <div class="slide">
                     <div class="news-card">
                         <div class="news-left">
-                            <p class="news-title" id="t1">Trending: बॉक्स ऑफिस पर नया रिकॉर्ड, एडवांस बुकिंग में फिल्म ने तोड़े सारे पुराने रिकॉर्ड्स</p>
+                            <button id="t1" class="btn" onclick="window.open('https://www.pinkvilla.com/', '_blank')">🎬 Box Office Updates</button>
                             <span class="news-meta">Pinkvilla • <span class="current-date"></span> 
-                                <button id="btn-t1" class="star-btn not-starred" onclick="toggleStar('t1', 'Pinkvilla', 'https://picsum.photos/id/1025/75/75')"><i class="far fa-star"></i> Save</button>
+                                <button id="btn-t1" class="star-btn not-starred" onclick="toggleStar('t1', 'Pinkvilla')"><i class="far fa-star"></i> Save</button>
                             </span>
                         </div>
-                        <div class="news-right"><img src="https://picsum.photos/id/1025/75/75"></div>
                     </div>
                     <div class="news-card">
                         <div class="news-left">
-                            <p class="news-title" id="t4">OTT Release: इस हफ्ते रिलीज हो रही हैं ये 5 धमाकेदार वेब सीरीज, सस्पेंस से भरपूर है लिस्ट</p>
+                            <button id="t4" class="btn" onclick="window.open('https://www.koimoi.com/', '_blank')">🍿 OTT Releases</button>
                             <span class="news-meta">Koimoi • <span class="current-date"></span> 
-                                <button id="btn-t4" class="star-btn not-starred" onclick="toggleStar('t4', 'Koimoi', 'https://picsum.photos/id/1011/75/75')"><i class="far fa-star"></i> Save</button>
+                                <button id="btn-t4" class="star-btn not-starred" onclick="toggleStar('t4', 'Koimoi')"><i class="far fa-star"></i> Save</button>
                             </span>
                         </div>
-                        <div class="news-right"><img src="https://picsum.photos/id/1011/75/75"></div>
                     </div>
                 </div>
 
@@ -180,32 +203,27 @@
                 <div class="slide">
                     <div class="news-card">
                         <div class="news-left">
-                            <p class="news-title" id="t2">Cricket Live: रोमांचक मोड़ पर पहुंचा मैच, अंतिम ओवर में जीत के लिए चाहिए इतने रन</p>
+                            <button id="t2" class="btn" onclick="window.open('https://www.cricbuzz.com/', '_blank')">🏏 Cricket Live Score</button>
                             <span class="news-meta">Cricbuzz • <span class="current-date"></span> 
-                                <button id="btn-t2" class="star-btn not-starred" onclick="toggleStar('t2', 'Cricbuzz', 'https://picsum.photos/id/200/75/75')"><i class="far fa-star"></i> Save</button>
+                                <button id="btn-t2" class="star-btn not-starred" onclick="toggleStar('t2', 'Cricbuzz')"><i class="far fa-star"></i> Save</button>
                             </span>
                         </div>
-                        <div class="news-right"><img src="https://picsum.photos/id/200/75/75"></div>
                     </div>
-                    <!-- क्रिकेट में नया जोड़ा गया कार्ड -->
                     <div class="news-card">
                         <div class="news-left">
-                            <p class="news-title" id="t5">Breaking: टी20 वर्ल्ड कप के लिए टीम का हुआ ऐलान, इन युवा खिलाड़ियों को मिला बड़ा मौका</p>
+                            <button id="t5" class="btn" onclick="window.open('https://www.sportskeeda.com/', '_blank')">🏆 World Cup Update</button>
                             <span class="news-meta">Sports Tak • <span class="current-date"></span> 
-                                <button id="btn-t5" class="star-btn not-starred" onclick="toggleStar('t5', 'Sports Tak', 'https://picsum.photos/id/1058/75/75')"><i class="far fa-star"></i> Save</button>
+                                <button id="btn-t5" class="star-btn not-starred" onclick="toggleStar('t5', 'Sports Tak')"><i class="far fa-star"></i> Save</button>
                             </span>
                         </div>
-                        <div class="news-right"><img src="https://picsum.photos/id/1058/75/75"></div>
                     </div>
-                    <!-- एक और क्रिकेट अपडेट -->
                     <div class="news-card">
                         <div class="news-left">
-                            <p class="news-title" id="t6">IPL Update: कप्तान ने प्रेस कॉन्फ्रेंस में किया खुलासा, कहा- "हम अगली रणनीति के लिए तैयार हैं"</p>
+                            <button id="t6" class="btn" onclick="window.open('https://www.espncricinfo.com/', '_blank')">📰 IPL News</button>
                             <span class="news-meta">ESPNCricinfo • <span class="current-date"></span> 
-                                <button id="btn-t6" class="star-btn not-starred" onclick="toggleStar('t6', 'ESPNCricinfo', 'https://picsum.photos/id/103/75/75')"><i class="far fa-star"></i> Save</button>
+                                <button id="btn-t6" class="star-btn not-starred" onclick="toggleStar('t6', 'ESPNCricinfo')"><i class="far fa-star"></i> Save</button>
                             </span>
                         </div>
-                        <div class="news-right"><img src="https://picsum.photos/id/103/75/75"></div>
                     </div>
                 </div>
 
@@ -213,21 +231,19 @@
                 <div class="slide">
                     <div class="news-card">
                         <div class="news-left">
-                            <p class="news-title" id="t3">पॉलिटिक्स लाइव: चुनाव नतीजों के बाद आज होगी अहम कैबिनेट बैठक</p>
+                            <button id="t3" class="btn" onclick="window.open('https://www.aajtak.in/', '_blank')">⚖️ Political News</button>
                             <span class="news-meta">Aaj Tak • <span class="current-date"></span> 
-                                <button id="btn-t3" class="star-btn not-starred" onclick="toggleStar('t3', 'Aaj Tak', 'https://picsum.photos/id/1062/75/75')"><i class="far fa-star"></i> Save</button>
+                                <button id="btn-t3" class="star-btn not-starred" onclick="toggleStar('t3', 'Aaj Tak')"><i class="far fa-star"></i> Save</button>
                             </span>
                         </div>
-                        <div class="news-right"><img src="https://picsum.photos/id/1062/75/75"></div>
                     </div>
                     <div class="news-card">
                         <div class="news-left">
-                            <p class="news-title" id="t7">बड़ा फैसला: सरकार ने नई योजना का किया ऐलान, आम आदमी को मिलेगी बड़ी राहत</p>
+                            <button id="t7" class="btn" onclick="window.open('https://ndtv.in/', '_blank')">🏛️ Government Schemes</button>
                             <span class="news-meta">NDTV India • <span class="current-date"></span> 
-                                <button id="btn-t7" class="star-btn not-starred" onclick="toggleStar('t7', 'NDTV India', 'https://picsum.photos/id/1044/75/75')"><i class="far fa-star"></i> Save</button>
+                                <button id="btn-t7" class="star-btn not-starred" onclick="toggleStar('t7', 'NDTV India')"><i class="far fa-star"></i> Save</button>
                             </span>
                         </div>
-                        <div class="news-right"><img src="https://picsum.photos/id/1044/75/75"></div>
                     </div>
                 </div>
 
@@ -235,12 +251,11 @@
                 <div class="slide">
                     <div class="news-card">
                         <div class="news-left">
-                            <p class="news-title" id="t8">आज का राशिफल: इन 3 राशियों के लिए बन रहा है धन लाभ का विशेष योग, जानें अपना हाल</p>
-                            <span class="news-meta">Astrotalk • <span class="current-date"></span> 
-                                <button id="btn-t8" class="star-btn not-starred" onclick="toggleStar('t8', 'Astrotalk', 'https://picsum.photos/id/1001/75/75')"><i class="far fa-star"></i> Save</button>
+                            <button id="t8" class="btn" onclick="window.open('https://vedprakash3.github.io/Jyotish_Website.io/', '_blank')">📂 Jyotish</button>
+                            <span class="news-meta">Spark News • <span class="current-date"></span> 
+                                <button id="btn-t8" class="star-btn not-starred" onclick="toggleStar('t8', 'Spark News')"><i class="far fa-star"></i> Save</button>
                             </span>
                         </div>
-                        <div class="news-right"><img src="https://picsum.photos/id/1001/75/75"></div>
                     </div>
                 </div>
 
@@ -248,12 +263,11 @@
                 <div class="slide">
                     <div class="news-card">
                         <div class="news-left">
-                            <p class="news-title" id="t9">Market Update: शेयर बाजार में लौटी रौनक, सेंसेक्स ने छुआ नया ऐतिहासिक शिखर</p>
+                            <button id="t9" class="btn" onclick="window.open('https://www.moneycontrol.com/', '_blank')">📈 Share Market Update</button>
                             <span class="news-meta">Moneycontrol • <span class="current-date"></span> 
-                                <button id="btn-t9" class="star-btn not-starred" onclick="toggleStar('t9', 'Moneycontrol', 'https://picsum.photos/id/1070/75/75')"><i class="far fa-star"></i> Save</button>
+                                <button id="btn-t9" class="star-btn not-starred" onclick="toggleStar('t9', 'Moneycontrol')"><i class="far fa-star"></i> Save</button>
                             </span>
                         </div>
-                        <div class="news-right"><img src="https://picsum.photos/id/1070/75/75"></div>
                     </div>
                 </div>
 
@@ -261,21 +275,19 @@
                 <div class="slide">
                     <div class="news-card">
                         <div class="news-left">
-                            <p class="news-title" id="t10">Tech News: नया AI मॉडल हुआ लॉन्च, इंसानों की तरह सोच और समझ कर दे रहा है जवाब</p>
+                            <button id="t10" class="btn" onclick="window.open('https://gadgets360.com/', '_blank')">🤖 AI Technology News</button>
                             <span class="news-meta">Gadgets 360 • <span class="current-date"></span> 
-                                <button id="btn-t10" class="star-btn not-starred" onclick="toggleStar('t10', 'Gadgets 360', 'https://picsum.photos/id/1080/75/75')"><i class="far fa-star"></i> Save</button>
+                                <button id="btn-t10" class="star-btn not-starred" onclick="toggleStar('t10', 'Gadgets 360')"><i class="far fa-star"></i> Save</button>
                             </span>
                         </div>
-                        <div class="news-right"><img src="https://picsum.photos/id/1080/75/75"></div>
                     </div>
                     <div class="news-card">
                         <div class="news-left">
-                            <p class="news-title" id="t11">Smartphone Launch: 200MP कैमरे के साथ नया फ्लैगशिप फोन बाजार में उतरा, जानें कीमत</p>
+                            <button id="t11" class="btn" onclick="window.open('https://www.techradar.com/', '_blank')">📱 Smartphone Launches</button>
                             <span class="news-meta">Tech Radar • <span class="current-date"></span> 
-                                <button id="btn-t11" class="star-btn not-starred" onclick="toggleStar('t11', 'Tech Radar', 'https://picsum.photos/id/109/75/75')"><i class="far fa-star"></i> Save</button>
+                                <button id="btn-t11" class="star-btn not-starred" onclick="toggleStar('t11', 'Tech Radar')"><i class="far fa-star"></i> Save</button>
                             </span>
                         </div>
-                        <div class="news-right"><img src="https://picsum.photos/id/109/75/75"></div>
                     </div>
                 </div>
 
@@ -297,7 +309,8 @@
     }
 
     // --- नीचे स्लाइडर के 'सेव्ड न्यूज़' टैब का लॉजिक ---
-    function toggleStar(id, source, imgUrl) {
+    function toggleStar(id, source) {
+        // Since buttons now have the ID, we grab their innerText directly.
         const title = document.getElementById(id).innerText;
         const date = new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'short' });
         let starredList = JSON.parse(localStorage.getItem('starredNews')) || [];
@@ -314,7 +327,9 @@
                 btn.innerHTML = '<i class="far fa-star"></i> Save';
             }
         } else {
-            starredList.push({ title, source, date, imgUrl, elementId: id });
+            // Also saving the original URL if we want to restore button click functionality in the saved tab (optional)
+            const onClickAttr = document.getElementById(id).getAttribute('onclick');
+            starredList.push({ title, source, date, elementId: id, action: onClickAttr });
             localStorage.setItem('starredNews', JSON.stringify(starredList));
             
             if(btn) {
@@ -356,15 +371,16 @@
 
         container.innerHTML = '';
         starredList.forEach((item, index) => {
+            // Saving the original button styling for saved items too!
             container.innerHTML += `
                 <div class="news-card">
                     <div class="news-left">
-                        <p class="news-title">${item.title}</p>
-                        <span class="news-meta">${item.source} • ${item.date} 
+                        <button class="btn" onclick="${item.action || ''}">${item.title}</button>
+                        <span class="news-meta">
+                            <span>${item.source} • ${item.date}</span>
                             <button class="delete-btn" onclick="removeStarredNewsDirectly(${index}, '${item.elementId}')"><i class="fas fa-trash"></i> Remove</button>
                         </span>
                     </div>
-                    <div class="news-right"><img src="${item.imgUrl}" style="width:60px; height:60px;"></div>
                 </div>
             `;
         });
